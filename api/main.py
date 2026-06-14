@@ -68,3 +68,7 @@ async def parse_pipeline(request: Request):
             dfs(node['id'])
 
     return {'num_nodes': num_nodes, 'num_edges': num_edges, 'is_dag': is_dag}
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)

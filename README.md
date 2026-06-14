@@ -17,6 +17,21 @@ A powerful, interactive drag-and-drop DAG (Directed Acyclic Graph) pipeline edit
 - **Backend**: Python, FastAPI, Uvicorn
 - **Architecture**: REST API
 
+## Project Structure
+
+```text
+Project/
+├── api/                  # Python FastAPI backend
+│   ├── main.py           # Backend endpoints
+│   └── requirements.txt  # Python dependencies
+├── frontend/             # React frontend
+│   ├── public/           # Static assets
+│   ├── src/              # React components and logic
+│   └── package.json      # Node dependencies and scripts
+├── vercel.json           # Vercel configuration for deployment
+└── README.md             # Project documentation
+```
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,46 +39,46 @@ A powerful, interactive drag-and-drop DAG (Directed Acyclic Graph) pipeline edit
 - Node.js (v18 or higher)
 - Python (v3.9 or higher)
 
-### Backend Setup
+### Local Development Setup
 
-1. Open a terminal and navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Create a virtual environment (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-3. Install the dependencies:
-   ```bash
-   pip install fastapi uvicorn
-   ```
-4. Start the FastAPI server:
-   ```bash
-   python main.py
-   ```
-   The backend will run on `http://127.0.0.1:8000`.
+Thanks to our setup, you can run both the frontend and backend with a single command!
 
-### Frontend Setup
-
-1. Open a new terminal and navigate to the `frontend` directory:
+1. Open a terminal and navigate to the `frontend` directory:
    ```bash
    cd frontend
    ```
-2. Install the dependencies:
+2. Install the Node.js dependencies:
    ```bash
    npm install
    ```
-3. Start the React development server:
+3. Set up the Python virtual environment for the backend:
    ```bash
+   cd ../api
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   pip install -r requirements.txt
+   ```
+4. Start both the React development server and the FastAPI backend:
+   ```bash
+   cd ../frontend
    npm start
    ```
-   The application will open in your browser at `http://localhost:3000`.
+   The frontend application will open in your browser at `http://localhost:3000`. The backend API will concurrently run on `http://127.0.0.1:8000`, and frontend API requests are automatically proxied to it.
 
 ### Production Deployment
 
-To serve an optimized production build of the frontend:
+#### Vercel (Recommended)
+
+This project is pre-configured to be easily deployed to Vercel.
+
+1. Push your code to a GitHub repository.
+2. Import the project into Vercel.
+3. Vercel will automatically detect the configuration in `vercel.json`. It will build the React app and deploy the `api/main.py` Python file as a serverless function!
+4. Simply click "Deploy".
+
+#### Manual Build
+
+To serve an optimized production build of the frontend locally:
 
 1. Navigate to the `frontend` directory:
    ```bash
@@ -73,15 +88,12 @@ To serve an optimized production build of the frontend:
    ```bash
    npm run build
    ```
-3. Install the `serve` package globally (if you haven't already):
+3. Serve the `build` directory using `serve`:
    ```bash
-   npm install -g serve
+   npx serve -s build
    ```
-4. Serve the `build` directory:
-   ```bash
-   serve -s build
-   ```
-   The production app will now be running on `http://localhost:3000`.
+   
+**Important Note:** The frontend application relies on the backend for graph validation (e.g., the "Submit" button). If serving the static frontend build locally, you must manually ensure the backend server is running concurrently by running `python main.py` in the `api` folder.
 
 ## How to Use
 
