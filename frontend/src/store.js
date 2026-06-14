@@ -13,6 +13,7 @@ export const useStore = create((set, get) => ({
     canvasLocked: false,
     activeTool: null, // tool state
     isDarkMode: false,
+    theme: 'omori',
     drawingColor: '#0D0D0D',
     past: [],
     future: [],
@@ -36,6 +37,7 @@ export const useStore = create((set, get) => ({
         set({ past: [...past, { nodes, edges }], future: newFuture, nodes: next.nodes, edges: next.edges });
     },
     toggleTheme: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
+    setTheme: (theme) => set({ theme }),
     setDrawingColor: (color) => set({ drawingColor: color }),
     getNodeID: (type) => {
         const newIDs = {...get().nodeIDs};

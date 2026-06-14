@@ -1,0 +1,356 @@
+/* neo-brutalist.css */
+
+body.theme-neo-brutalist {
+  /* Colors */
+  --ws-white: #FFFFFF;
+  --ws-black: #111111;
+  --ws-ink: #000000;
+  --ws-gray-light: #222222;
+  --ws-gray-mid: #1A1A1A;
+  --ws-gray-dark: #333333;
+  --bs-void: #000000;
+
+  /* Font overrides */
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Inter', sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+
+  /* Node Defaults */
+  --border-node: 4px solid #000000;
+  --border-active: 4px solid #FFC000;
+  --border-inactive: 2px dashed #000000;
+  --radius: 0px; /* Sharp corners */
+  
+  background-color: #FFC000;
+  color: #000000;
+  cursor: default; /* Reset custom cursor */
+}
+
+/* Dark Mode Overrides for Neo Brutalist */
+body.theme-neo-brutalist.darkMode {
+  background-color: #111111;
+  color: #FFFFFF;
+  --ws-white: #111111;
+  --ws-black: #FFFFFF;
+  --ws-ink: #FFC000;
+  --border-node: 2px solid #FFC000;
+}
+
+body.theme-neo-brutalist button, 
+body.theme-neo-brutalist a, 
+body.theme-neo-brutalist select, 
+body.theme-neo-brutalist .omoriDraggable {
+  cursor: pointer !important;
+}
+
+
+
+/* Background grid handled by ReactFlow Background component */
+
+/* Standard Node */
+body.theme-neo-brutalist .omoriRoom {
+  background-color: #FFC000;
+  color: #000000;
+  border: 4px solid #000000;
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px #000000;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+body.theme-neo-brutalist.darkMode .omoriRoom {
+  background-color: #111111;
+  color: #FFFFFF;
+  border: 4px solid #FFC000;
+  box-shadow: 8px 8px 0px #FFC000;
+}
+
+/* Hover effects */
+body.theme-neo-brutalist .omoriRoom:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 12px 12px 0px #000000;
+}
+body.theme-neo-brutalist.darkMode .omoriRoom:hover {
+  box-shadow: 12px 12px 0px #FFC000;
+}
+
+/* Room Titles */
+body.theme-neo-brutalist .omoriRoomTitle {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: transparent !important;
+  color: inherit !important;
+  border-bottom: 4px solid #000000 !important;
+  margin: -16px -16px 12px -16px;
+  padding: 8px 12px;
+}
+body.theme-neo-brutalist.darkMode .omoriRoomTitle {
+  border-bottom: 4px solid #FFC000 !important;
+}
+
+/* Action Node (Red Theme) - For LLM node for example */
+body.theme-neo-brutalist .omoriRoom.llm {
+  background-color: #CB2026;
+  color: #FFFFFF;
+  border: 4px solid #000000;
+  box-shadow: 10px 10px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.llm .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Output Node */
+body.theme-neo-brutalist .omoriRoom.output {
+  background-color: #111111;
+  color: #FFFFFF;
+  border: 4px solid #FFC000;
+  box-shadow: 8px 8px 0px #FFC000;
+}
+body.theme-neo-brutalist .omoriRoom.output .omoriRoomTitle {
+  border-bottom: 4px solid #FFC000 !important;
+}
+
+/* Text Node */
+body.theme-neo-brutalist .omoriRoom.text {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.text .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* API Node */
+body.theme-neo-brutalist .omoriRoom.api {
+  background-color: #00FFFF;
+  color: #000000;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.api .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Logic Node */
+body.theme-neo-brutalist .omoriRoom.logic {
+  background-color: #FF00FF;
+  color: #FFFFFF;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.logic .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Math Node */
+body.theme-neo-brutalist .omoriRoom.math {
+  background-color: #0000FF;
+  color: #FFFFFF;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.math .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Note Node */
+body.theme-neo-brutalist .omoriRoom.note {
+  background-color: #00FF00;
+  color: #000000;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.note .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Timer Node */
+body.theme-neo-brutalist .omoriRoom.timer {
+  background-color: #FF8800;
+  color: #000000;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriRoom.timer .omoriRoomTitle {
+  border-bottom: 4px solid #000000 !important;
+}
+
+/* Inputs */
+body.theme-neo-brutalist .omoriInputGroup label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: inherit !important;
+}
+body.theme-neo-brutalist .omoriInput {
+  font-family: var(--font-mono);
+  border: 4px solid #000000;
+  background: #FFFFFF;
+  color: #000000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0px #000000;
+  margin-top: 4px;
+}
+body.theme-neo-brutalist select.omoriInput option {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+/* Toolbar / Pipeline */
+body.theme-neo-brutalist .omoriDialogue {
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
+  box-shadow: 8px 8px 0px #000000;
+}
+body.theme-neo-brutalist .omoriDraggable {
+  background: #FFC000;
+  color: #000000;
+  border: 4px solid #000000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0px #000000;
+}
+body.theme-neo-brutalist .omoriDialogueSpeaker {
+  color: #000000;
+  font-weight: 900;
+}
+
+body.theme-neo-brutalist.darkMode .omoriInput {
+  border: 2px solid #FFC000;
+  background: #111111;
+  color: #FFFFFF;
+}
+
+/* Edges */
+body.theme-neo-brutalist .react-flow__connection-path, 
+body.theme-neo-brutalist .react-flow__edge-path {
+  stroke: #000000 !important;
+  stroke-width: 4px !important;
+  stroke-dasharray: none !important;
+}
+body.theme-neo-brutalist.darkMode .react-flow__connection-path, 
+body.theme-neo-brutalist.darkMode .react-flow__edge-path {
+  stroke: #FFC000 !important;
+}
+body.theme-neo-brutalist .react-flow__handle {
+  border-radius: 0;
+  border: 2px solid #000000;
+  width: 12px;
+  height: 12px;
+}
+body.theme-neo-brutalist.darkMode .react-flow__handle {
+  border: 2px solid #FFC000;
+}
+
+/* Nav */
+body.theme-neo-brutalist .omoriNav {
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
+  box-shadow: 6px 6px 0px #000000;
+}
+body.theme-neo-brutalist.darkMode .omoriNav {
+  background: #111111;
+  border: 4px solid #FFC000;
+  box-shadow: 6px 6px 0px #FFC000;
+}
+
+body.theme-neo-brutalist .omoriNavBtn {
+  border-radius: 0;
+  color: #000000;
+}
+body.theme-neo-brutalist.darkMode .omoriNavBtn {
+  color: #FFFFFF;
+}
+body.theme-neo-brutalist .omoriNavBtn:hover {
+  background: #000000;
+  color: #FFC000;
+}
+body.theme-neo-brutalist.darkMode .omoriNavBtn:hover {
+  background: #FFC000;
+  color: #111111;
+}
+body.theme-neo-brutalist .omoriNavBtn.active {
+  background: #000000;
+  color: #FFC000;
+}
+body.theme-neo-brutalist.darkMode .omoriNavBtn.active {
+  background: #FFC000;
+  color: #111111;
+}
+body.theme-neo-brutalist .omoriNavDivider {
+  background: #000000;
+  width: 4px;
+}
+body.theme-neo-brutalist.darkMode .omoriNavDivider {
+  background: #FFC000;
+  width: 4px;
+}
+
+/* Buttons like theme switcher */
+body.theme-neo-brutalist button.omoriNavBtn[title="Switch Theme Style"],
+body.theme-neo-brutalist button.omoriNavBtn[title="Toggle Dark Mode"] {
+  border: 4px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  border-radius: 0 !important;
+  background: #FFFFFF !important;
+  color: #000000 !important;
+}
+body.theme-neo-brutalist.darkMode button.omoriNavBtn[title="Switch Theme Style"],
+body.theme-neo-brutalist.darkMode button.omoriNavBtn[title="Toggle Dark Mode"] {
+  border: 4px solid #FFC000 !important;
+  box-shadow: 4px 4px 0px #FFC000 !important;
+  background: #111111 !important;
+  color: #FFC000 !important;
+}
+body.theme-neo-brutalist button.omoriNavBtn[title="Switch Theme Style"]:hover,
+body.theme-neo-brutalist button.omoriNavBtn[title="Toggle Dark Mode"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000000 !important;
+}
+body.theme-neo-brutalist.darkMode button.omoriNavBtn[title="Switch Theme Style"]:hover,
+body.theme-neo-brutalist.darkMode button.omoriNavBtn[title="Toggle Dark Mode"]:hover {
+  box-shadow: 6px 6px 0px #FFC000 !important;
+}
+
+/* Minimap */
+body.theme-neo-brutalist .react-flow__minimap {
+  border: 4px solid #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 6px 6px 0px #000000 !important;
+}
+body.theme-neo-brutalist.darkMode .react-flow__minimap {
+  border: 4px solid #FFC000 !important;
+  box-shadow: 6px 6px 0px #FFC000 !important;
+}
+
+/* Context Menu */
+body.theme-neo-brutalist .omori-context-menu {
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
+  box-shadow: 8px 8px 0px #000000;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+body.theme-neo-brutalist.darkMode .omori-context-menu {
+  background: #111111;
+  border: 4px solid #FFC000;
+  box-shadow: 8px 8px 0px #FFC000;
+  color: #FFFFFF;
+}
+body.theme-neo-brutalist .omori-context-menu-item:hover {
+  background: #000000;
+  color: #FFC000;
+}
+body.theme-neo-brutalist.darkMode .omori-context-menu-item:hover {
+  background: #FFC000;
+  color: #111111;
+}
+
+/* Hide Omori-specific elements like Cord, Mewo, Box */
+body.theme-neo-brutalist .omoriCord,
+body.theme-neo-brutalist .whitespace-box,
+body.theme-neo-brutalist .omoriLightbulb {
+  display: none !important;
+}

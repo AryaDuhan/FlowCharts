@@ -199,6 +199,46 @@ button, a, select, .omoriDraggable {
   color: #3D10AD;
 }
 
+/* Other Nodes */
+.omoriRoom.api .omoriRoomTitle {
+  background: var(--hs-mint);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.logic .omoriRoomTitle {
+  background: var(--hs-lavender);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.math .omoriRoomTitle {
+  background: var(--hs-peach);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.note {
+  background: #FFF9CC;
+}
+.omoriRoom.note .omoriRoomTitle {
+  background: #FFE066;
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.timer .omoriRoomTitle {
+  background: var(--hs-sage);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
 /* selection */
 .omoriRoom.selected::after {
   content: '';
@@ -275,6 +315,8 @@ select.omoriInput {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: max-content;
+  max-width: 95vw;
 }
 
 .omoriDialogueSpeaker {
@@ -289,7 +331,13 @@ select.omoriInput {
   display: flex;
   gap: 10px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.omoriDialogueRow > * {
+  flex-shrink: 0;
 }
 
 .omoriDraggable {
@@ -666,6 +714,16 @@ select.omoriInput {
 }
 
 .erasing, .erasing .react-flow__pane, .erasing .omoriRoom { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white' stroke='red' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21'/%3E%3Cpath d='M22 21H7'/%3E%3Cpath d='m5 11 9 9'/%3E%3C/svg%3E") 0 24, crosshair !important; }
+
+@keyframes mewoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes doorPickerFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* Dark Mode Overrides */
 body.darkMode {

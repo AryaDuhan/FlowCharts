@@ -12,7 +12,28 @@ const BOX_PUSH_STRENGTH = 20;
 const LERP_SPEED        = 0.09;
 const FLICKER_CHANCE    = 0.0008;
 
-function getColors(isDark) {
+function getColors(isDark, theme) {
+    if (theme === 'neo-brutalist') {
+        if (isDark) return { base: "#222222", dim: "#222222", lit: () => "#444444" };
+        return { base: "rgba(0,0,0,0.15)", dim: "rgba(0,0,0,0.05)", lit: () => "rgba(0,0,0,0.3)" };
+    }
+    if (theme === 'editorial') {
+        return { base: "rgba(217,211,197,0.4)", dim: "rgba(217,211,197,0.1)", lit: () => "rgba(91,72,36,0.2)" };
+    }
+    if (theme === 'corporate') {
+        return { base: "rgba(255,255,255,0.05)", dim: "rgba(255,255,255,0.02)", lit: () => "rgba(249,224,85,0.3)" };
+    }
+    if (theme === 'playful') {
+        return { base: "rgba(59,66,196,0.1)", dim: "rgba(59,66,196,0.03)", lit: () => "rgba(220,136,218,0.4)" };
+    }
+    if (theme === 'wireframe') {
+        return { base: "rgba(123,178,229,0.15)", dim: "rgba(123,178,229,0.05)", lit: () => "rgba(252,182,36,0.3)" };
+    }
+    if (theme === 'medical') {
+        return { base: "rgba(44,79,148,0.1)", dim: "rgba(44,79,148,0.03)", lit: () => "rgba(38,189,230,0.3)" };
+    }
+    
+    // Default Omori
     if (isDark) {
         return {
             base: "rgba(220, 220, 220, 0.13)",
@@ -44,11 +65,15 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     w: 0,
     h: 0,
     isDarkMode: false,
+    theme: 'omori',
   });
   const isDarkMode = useStore(state => state.isDarkMode);
+  const theme = useStore(state => state.theme);
+  
   useEffect(() => {
     stateRef.current.isDarkMode = isDarkMode;
-  }, [isDarkMode]);
+    stateRef.current.theme = theme;
+  }, [isDarkMode, theme]);
 
   const rafRef = useRef(null);
 
@@ -90,7 +115,7 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     const ctx = canvas.getContext("2d");
 
     const tick = () => {
-      const colors = getColors(stateRef.current.isDarkMode);
+      const colors = getColors(stateRef.current.isDarkMode, stateRef.current.theme);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Read node positions straight from the DOM every frame

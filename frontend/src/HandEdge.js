@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { BaseEdge, getSmoothStepPath } from 'reactflow';
+import { useStore } from './store';
 import handRight from './assets/images/hand-right.png';
 import handLeft from './assets/images/hand-left.png';
 import handUp from './assets/images/hand-up.png';
@@ -17,6 +18,7 @@ export const HandEdge = ({
   markerEnd,
   selected,
 }) => {
+  const theme = useStore((state) => state.theme);
   const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -73,7 +75,7 @@ export const HandEdge = ({
       
       <path ref={pathRef} d={edgePath} fill="none" stroke="none" />
       
-      {points.map((pt, i) => (
+      {theme === 'omori' && points.map((pt, i) => (
         <image 
           key={`stat-${i}`} 
           href={pt.img} 
