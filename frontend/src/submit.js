@@ -33,11 +33,16 @@ export const SubmitButton = () => {
           body: formData,
         });
 
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`HTTP ${response.status}: ${text}`);
+        }
+
         const data = await response.json();
         setResult(data);
       } catch (error) {
         console.error("Failed to parse pipeline:", error);
-        alert("Failed to connect to the backend on port 8000!");
+        alert(`Backend connection failed! Error: ${error.message}`);
       }
     }
   };
