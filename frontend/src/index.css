@@ -1,0 +1,652 @@
+/* variables */
+:root {
+  /* worlds */
+  --ws-white: #FFFFFF;
+  --ws-black: #0D0D0D;
+  --ws-ink: #1A1A1A;
+  --ws-gray-light: #E8E8E8;
+  --ws-gray-mid: #A2A0A0;
+  --ws-gray-dark: #666666;
+  --bs-void: #050505;
+}
+
+body.darkMode {
+  --ws-white: #0D0D0D;
+  --ws-black: #FFFFFF;
+  --ws-ink: #EAEAEA;
+}
+
+:root {
+  /* headspace */
+  --hs-lavender: #C8A4E9;
+  --hs-lilac: #A168F9;
+  --hs-mint: #9EC5E2;
+  --hs-rose: #F6C0F8;
+  --hs-peach: #F2C4A0;
+  --hs-sage: #B8D4B0;
+  --hs-cream: #FEFBFF;
+
+  /* pixel accents */
+  --px-purple: #7B5EA7;
+  --px-teal: #5BB8C4;
+  --px-gold: #E8C84A;
+
+  /* type */
+  --font-body: 'Gaegu', cursive;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-display: 'Caveat', cursive;
+
+  /* borders */
+  --border-node: 2px solid var(--ws-black);
+  --border-active: 3px solid var(--ws-black);
+  --border-inactive: 1px dashed var(--ws-gray-mid);
+  --radius: 2px;
+}
+
+/* global */
+body {
+  margin: 0;
+  background-color: var(--ws-white);
+  color: var(--ws-black);
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: url('./assets/images/cursor.png'), auto;
+  overflow: hidden;
+}
+
+button, a, select, .omoriDraggable {
+  cursor: url('./assets/images/cursor.png'), pointer !important;
+}
+
+/* nodes */
+.omoriRoom {
+  background: var(--ws-white);
+  border: var(--border-node);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-family: var(--font-body);
+  color: var(--ws-black);
+  box-shadow: none;
+  transition: border 180ms ease-out;
+}
+
+
+.omoriRoomTitle {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.omoriRoomId {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--ws-gray-dark);
+}
+
+/* node bg */
+.omoriRoom.input .omoriRoomTitle {
+  background: #EAEAEA; /* light gray */
+  color: var(--ws-black);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: var(--border-node);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.llm { 
+  background: #FFFFFF; /* white */
+  border: 3px solid #00CC88; /* green */
+  color: #4A3C32; /* dark brown text */
+  padding: 0;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.omoriRoom.llm .omoriRoomTitle {
+  background: #FFB4A2; /* peachy red */
+  color: #4A3C32;
+  padding: 0 16px;
+  margin: 0;
+  height: 50%;
+  border-bottom: 3px solid #00CC88; /* border */
+  box-sizing: border-box;
+}
+.omoriRoom.llm > div:last-child {
+  height: 50%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.omoriRoom.llm .omoriRoomId {
+  color: #4A3C32;
+  opacity: 0.7;
+}
+
+/* handles */
+.omoriRoom.llm .react-flow__handle {
+  background: #FF5555; /* picnic red */
+  border: 2px solid #4A3C32; /* buffer */
+}
+.omoriRoom.output { 
+  background: var(--ws-black); 
+  color: var(--ws-white); 
+  border-color: var(--ws-white);
+}
+.omoriRoom.output .omoriRoomTitle {
+  background: #333333; /* dark gray */
+  color: var(--ws-white);
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: 2px solid var(--ws-white);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.output .omoriInput {
+  color: var(--ws-white);
+  border-color: var(--ws-white);
+}
+.omoriRoom.output select.omoriInput {
+  background: var(--ws-black);
+  color: var(--ws-white);
+}
+.omoriRoom.output .omoriInput option {
+  background: var(--ws-black);
+  color: var(--ws-white);
+}
+.omoriRoom.text { 
+  background: #FFD5C2;
+  border-color: #3D10AD;
+  color: #3D10AD;
+}
+
+.omoriRoom.text .omoriRoomTitle {
+  background: #FFF385;
+  color: #3D10AD;
+  padding: 4px 8px;
+  margin: -16px -16px 12px -16px;
+  border-bottom: 2px solid #3D10AD;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.omoriRoom.text .omoriRoomId {
+  color: #B19DFF;
+}
+.omoriRoom.text .omoriInput {
+  color: #3D10AD;
+  border-color: #3D10AD;
+  background: #FFFFFF;
+  padding: 8px;
+  border-radius: var(--radius);
+  border-bottom: 2px solid #3D10AD;
+  box-sizing: border-box;
+}
+.omoriRoom.text .omoriInput:focus {
+  border-bottom-width: 3px;
+  border-color: #3D10AD;
+}
+.omoriRoom.text .omoriInputGroup label {
+  color: #3D10AD;
+}
+
+/* selection */
+.omoriRoom.selected::after {
+  content: '';
+  position: absolute;
+  top: -6px; left: -6px; right: -6px; bottom: -6px;
+  background-image: 
+    linear-gradient(90deg, var(--ws-black) 50%, transparent 50%),
+    linear-gradient(90deg, var(--ws-black) 50%, transparent 50%),
+    linear-gradient(0deg, var(--ws-black) 50%, transparent 50%),
+    linear-gradient(0deg, var(--ws-black) 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 8px 2px, 8px 2px, 2px 8px, 2px 8px;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  animation: border-dance 1s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes border-dance {
+  100% {
+    background-position: 8px 0, -8px 100%, 0 -8px, 100% 8px;
+  }
+}
+
+/* inputs */
+.omoriInputGroup {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.omoriInputGroup label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ws-gray-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.omoriInput {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--ws-ink);
+  background: transparent;
+  color: var(--ws-black);
+  padding: 4px 0;
+  outline: none;
+}
+
+.omoriInput:focus {
+  border-bottom-width: 3px;
+}
+
+select.omoriInput {
+  border: 2px solid var(--ws-ink);
+  border-radius: var(--radius);
+  padding: 4px;
+}
+
+/* toolbar */
+.omoriDialogue {
+  background: var(--ws-white);
+  border: 2px solid var(--ws-black);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.omoriDialogueSpeaker {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ws-gray-dark);
+}
+
+.omoriDialogueRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.omoriDraggable {
+  border: var(--border-node);
+  background: var(--ws-white);
+  padding: 6px 14px;
+  cursor: grab;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 180ms ease-out;
+}
+
+.omoriDraggable:hover {
+  box-shadow: 0 0 0 1px var(--ws-black);
+}
+
+/* submit */
+.omoriSubmit {
+  position: relative;
+  background: var(--ws-black);
+  color: var(--ws-white);
+  border: 2px solid var(--ws-black);
+  box-shadow: inset 0 0 0 2px var(--ws-white); /* border */
+  font-family: 'OMORI_GAME', cursive;
+  font-size: 1.1rem;
+  padding: 6px 20px;
+  cursor: pointer;
+  transition: all 180ms ease-out;
+  border-radius: var(--radius);
+}
+
+.omoriSubmit:hover {
+  background: var(--ws-white);
+  color: var(--ws-black);
+  box-shadow: inset 0 0 0 2px var(--ws-black);
+}
+
+/* submit */
+.omoriSparkle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: auto;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* context menu */
+.omori-context-menu {
+  position: absolute;
+  z-index: 1000;
+  background: var(--ws-white);
+  border: 2px solid var(--ws-black);
+  border-radius: var(--radius);
+  padding: 4px;
+  box-shadow: inset 0 0 0 2px var(--ws-black);
+  min-width: 120px;
+  font-family: 'OMORI_GAME', cursive;
+  font-size: 1.1rem;
+}
+
+.omori-context-menu-item {
+  padding: 8px 12px;
+  cursor: url('./assets/images/cursor.png'), pointer;
+  color: var(--ws-black);
+  transition: all 100ms ease;
+}
+
+.omori-context-menu-item:hover {
+  background: var(--ws-black);
+  color: var(--ws-white);
+}
+
+.omori-context-menu-divider {
+  height: 2px;
+  background: var(--ws-black);
+  margin: 4px 0;
+}
+
+/* react flow */
+.react-flow__handle {
+  width: 10px;
+  height: 10px;
+  background-color: var(--ws-white);
+  border: 2px solid var(--ws-black);
+  border-radius: var(--radius);
+}
+
+.react-flow__handle:hover {
+  background-color: var(--ws-black);
+  transform: scale(1.2);
+}
+
+.react-flow__connection-path, .react-flow__edge-path {
+  stroke: var(--ws-gray-dark) !important;
+  stroke-width: 1.5px !important;
+  stroke-dasharray: 4 3;
+}
+
+/* hide controls */
+.react-flow__controls {
+  display: none !important;
+}
+
+/* cord */
+.omoriCord {
+  position: fixed;
+  top: 90px; /* positioning */
+  left: 50%;
+  width: 1.5px;
+  height: 60px; /* size */
+  background: var(--ws-ink);
+  transform: translateX(-50%);
+  transform-origin: top center;
+  animation: cord-sway 4s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes cord-sway {
+  0%, 100% { transform: translateX(-50%) rotate(-0.5deg); }
+  50%       { transform: translateX(-50%) rotate(0.5deg); }
+}
+
+.omoriLightbulb {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/*  */
+/* whitespace box */
+/* whitespace box */
+/*  */
+.whitespace-box {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 5;
+  width: 180px;
+  pointer-events: auto;
+}
+
+.whitespace-content {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;   /* aspect ratio */
+  border: 2px solid var(--ws-black);
+  border-radius: var(--radius);
+  background: var(--ws-white);
+}
+
+/* icons */
+.ws-icon {
+  position: absolute;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* door */
+.ws-icon--door {
+  top: 10%;
+  left: 10%;
+  width: 36px;
+  height: auto;
+  pointer-events: auto;
+  cursor: url('./assets/images/cursor.png'), pointer;
+}
+
+/* sketchbook */
+.ws-icon--sketchbook {
+  top: 5%;
+  right: 5%;
+  width: 20px;
+  height: auto;
+}
+
+/* laptop */
+.ws-icon--laptop {
+  top: 20%;
+  left: 45%;
+  width: 24px;
+  height: auto;
+}
+
+/* tissuebox */
+.ws-icon--tissues {
+  bottom: 5%;
+  right: 5%;
+  width: 20px;
+  height: auto;
+}
+
+.ws-icon--cat-container {
+  position: absolute;
+  bottom: 0px;
+  left: -44px;
+}
+
+.ws-icon--cat {
+  position: relative !important;
+  display: block;
+  width: 36px;
+  height: auto;
+}
+
+.ws-mewo-dialogue {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ws-black);
+  color: var(--ws-white);
+  border: 3px solid var(--ws-white);
+  box-shadow: 0 0 0 2px var(--ws-black);
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 100;
+  width: 215px;
+  height: 26px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* modal */
+.omori-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.omori-modal-content {
+  background: var(--ws-white);
+  border: 4px solid var(--ws-black);
+  padding: 20px;
+  width: 90vw;
+  max-width: 800px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+}
+
+.omori-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--ws-black);
+  padding-bottom: 8px;
+}
+
+.omori-modal-header h3 {
+  margin: 0;
+  font-family: 'OMORI_GAME', cursive;
+  font-size: 1.5rem;
+}
+
+.omori-close-btn {
+  background: none;
+  border: 2px solid var(--ws-black);
+  cursor: pointer;
+  font-family: 'OMORI_GAME', cursive;
+  padding: 2px 8px;
+}
+
+.omori-close-btn:hover {
+  background: var(--ws-black);
+  color: var(--ws-white);
+}
+
+.omori-crop-container {
+  display: flex;
+  justify-content: center;
+  background: var(--ws-gray-light);
+  border: 2px dashed var(--ws-gray-dark);
+  padding: 10px;
+  overflow: auto;
+}
+
+.omori-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* nav */
+.omoriNav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 2px;
+  background: var(--ws-white);
+  border: 2px solid var(--ws-black);
+  border-radius: var(--radius);
+  padding: 4px;
+}
+
+.omoriNavBtn {
+  background: var(--ws-white);
+  border: 1px solid var(--ws-gray-light);
+  border-radius: var(--radius);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ws-black);
+  transition: all 150ms ease-out;
+  padding: 0;
+}
+
+.omoriNavBtn:hover {
+  background: var(--ws-black);
+  color: var(--ws-white);
+  border-color: var(--ws-black);
+}
+
+.omoriNavBtn.active {
+  background: var(--ws-black);
+  color: var(--ws-white);
+}
+
+.omoriNavDivider {
+  width: 1px;
+  background: var(--ws-gray-light);
+  margin: 4px 2px;
+}
+
+/* minimap */
+.react-flow__minimap {
+  border: 2px solid var(--ws-black) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
