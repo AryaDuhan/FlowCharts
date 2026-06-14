@@ -1,21 +1,36 @@
 import { useEffect, useRef, useCallback } from "react";
+import { useStore } from "./store";
 
 // constants
 const GRID_SIZE         = 28;
 const DOT_RADIUS        = 1.5;
 const CURSOR_RADIUS     = 90;
-const CURSOR_STRENGTH   = 8;
+const CURSOR_STRENGTH   = 20;
 const BOX_MARGIN        = 14;
 const BOX_PUSH_RADIUS   = 80;
 const BOX_PUSH_STRENGTH = 20;
 const LERP_SPEED        = 0.09;
 const FLICKER_CHANCE    = 0.0008;
 
-const DOT_BASE = "rgba(30,28,24,0.13)";
-const DOT_DIM  = "rgba(30,28,24,0.04)";
-function dotLit(t) {
-  const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
-  return `rgba(20,18,14,${op.toFixed(3)})`;
+function getColors(isDark) {
+    if (isDark) {
+        return {
+            base: "rgba(220, 220, 220, 0.13)",
+            dim: "rgba(220, 220, 220, 0.04)",
+            lit: (t) => {
+                const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
+                return `rgba(255, 255, 255, ${op.toFixed(3)})`;
+            }
+        };
+    }
+    return {
+        base: "rgba(30,28,24,0.13)",
+        dim: "rgba(30,28,24,0.04)",
+        lit: (t) => {
+            const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
+            return `rgba(20,18,14,${op.toFixed(3)})`;
+        }
+    };
 }
 
 // background component
@@ -28,7 +43,13 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     dpr:   1,
     w: 0,
     h: 0,
+    isDarkMode: false,
   });
+  const isDarkMode = useStore(state => state.isDarkMode);
+  useEffect(() => {
+    stateRef.current.isDarkMode = isDarkMode;
+  }, [isDarkMode]);
+
   const rafRef = useRef(null);
 
   const buildGrid = useCallback((w, h) => {
@@ -69,6 +90,7 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     const ctx = canvas.getContext("2d");
 
     const tick = () => {
+      const colors = getColors(stateRef.current.isDarkMode);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Read node positions straight from the DOM every frame
@@ -169,7 +191,7 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
           DOT_RADIUS * dpr, 0, Math.PI * 2
         );
         ctx.fillStyle =
-          dot.flicker > 0 ? DOT_DIM : lit > 0.05 ? dotLit(lit) : DOT_BASE;
+          dot.flicker > 0 ? colors.dim : lit > 0.05 ? colors.lit(lit) : colors.base;
         ctx.fill();
       }
 

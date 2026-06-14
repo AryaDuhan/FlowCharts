@@ -13,6 +13,7 @@
     "react-scripts": "^5.0.1",
     "reactflow": "^11.8.3",
     "web-vitals": "^2.1.4",
+    "zundo": "^2.3.0",
     "zustand": "^5.0.14"
   },
   "scripts": {

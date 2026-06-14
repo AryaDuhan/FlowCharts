@@ -3,10 +3,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { useStore } from '../store';
 
 export const TextNode = ({ id, data, selected }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const textAreaRef = useRef(null);
+
+  const updateNodeField = useStore((state) => state.updateNodeField);
 
   const handleTextChange = (e) => {
     setCurrText(e.target.value);

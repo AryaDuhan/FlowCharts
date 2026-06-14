@@ -1,13 +1,14 @@
 import React from 'react';
 
-export const BaseNode = ({ id, type, title, data, selected, children, style = {} }) => {
+export const BaseNode = ({ id, type, title, data, selected, children, style = {}, onContextMenu }) => {
   // check lock state
   const isLocked = data?.locked || false;
 
   return (
     <div 
-        className={`omoriRoom ${type} ${selected ? 'selected' : ''}`} 
+        className={`omoriRoom ${type} ${selected ? 'selected' : ''} ${data?.grayscale ? 'grayscale' : ''}`} 
         style={{ width: 250, position: 'relative', ...style }}
+        onContextMenu={onContextMenu}
     >
       {/* lock icon */}
       {isLocked && (

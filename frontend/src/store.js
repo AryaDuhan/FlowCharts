@@ -13,7 +13,28 @@ export const useStore = create((set, get) => ({
     canvasLocked: false,
     activeTool: null, // tool state
     isDarkMode: false,
-    drawingColor: 'white',
+    drawingColor: '#0D0D0D',
+    past: [],
+    future: [],
+    saveState: () => {
+        const { nodes, edges, past } = get();
+        const newPast = [...past, { nodes, edges }].slice(-50);
+        set({ past: newPast, future: [] });
+    },
+    undo: () => {
+        const { past, future, nodes, edges } = get();
+        if (past.length === 0) return;
+        const previous = past[past.length - 1];
+        const newPast = past.slice(0, past.length - 1);
+        set({ past: newPast, future: [{ nodes, edges }, ...future], nodes: previous.nodes, edges: previous.edges });
+    },
+    redo: () => {
+        const { past, future, nodes, edges } = get();
+        if (future.length === 0) return;
+        const next = future[0];
+        const newFuture = future.slice(1);
+        set({ past: [...past, { nodes, edges }], future: newFuture, nodes: next.nodes, edges: next.edges });
+    },
     toggleTheme: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
     setDrawingColor: (color) => set({ drawingColor: color }),
     getNodeID: (type) => {
@@ -27,6 +48,7 @@ export const useStore = create((set, get) => ({
     },
     setActiveTool: (tool) => set((state) => ({ activeTool: state.activeTool === tool ? null : tool })),
     deleteSelected: () => {
+        get().saveState();
         set({
             nodes: get().nodes.filter(n => !n.selected),
             edges: get().edges.filter(e => !e.selected),
@@ -42,6 +64,7 @@ export const useStore = create((set, get) => ({
             set({ canvasLocked: !get().canvasLocked });
         } else {
             // toggle locks
+            get().saveState();
             const anyUnlocked = [...selectedNodes, ...selectedEdges].some(item => !item.data?.locked);
             const lockState = anyUnlocked;
 
@@ -52,6 +75,7 @@ export const useStore = create((set, get) => ({
         }
     },
     addNode: (node) => {
+        get().saveState();
         set({
             nodes: [...get().nodes, node]
         });
@@ -76,11 +100,13 @@ export const useStore = create((set, get) => ({
       });
     },
     onConnect: (connection) => {
+      get().saveState();
       set({
         edges: addEdge({...connection, type: 'hand', animated: false }, get().edges),
       });
     },
     updateNodeField: (nodeId, fieldName, fieldValue) => {
+      get().saveState();
       set({
         nodes: get().nodes.map((node) => {
           if (node.id === nodeId) {
@@ -92,6 +118,7 @@ export const useStore = create((set, get) => ({
       });
     },
     clearAll: () => {
+      get().saveState();
       set({ nodes: [], edges: [] });
     },
   }));
