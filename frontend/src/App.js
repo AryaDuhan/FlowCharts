@@ -1,6 +1,6 @@
-import { ReactFlowProvider } from 'reactflow';
-import { PipelineToolbar } from './toolbar';
-import { PipelineUI } from './ui';
+import { ReactFlowProvider } from "reactflow";
+import { PipelineToolbar } from "./toolbar";
+import { PipelineUI } from "./ui";
 
 function App() {
   return (

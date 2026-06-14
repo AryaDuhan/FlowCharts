@@ -64,6 +64,7 @@ A powerful, interactive drag-and-drop DAG (Directed Acyclic Graph) pipeline edit
 ### Production Deployment
 
 To serve an optimized production build of the frontend:
+
 1. Navigate to the `frontend` directory:
    ```bash
    cd frontend

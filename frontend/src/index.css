@@ -1,40 +1,40 @@
 /* variables */
 :root {
   /* worlds */
-  --ws-white: #FFFFFF;
-  --ws-black: #0D0D0D;
-  --ws-ink: #1A1A1A;
-  --ws-gray-light: #E8E8E8;
-  --ws-gray-mid: #A2A0A0;
+  --ws-white: #ffffff;
+  --ws-black: #0d0d0d;
+  --ws-ink: #1a1a1a;
+  --ws-gray-light: #e8e8e8;
+  --ws-gray-mid: #a2a0a0;
   --ws-gray-dark: #666666;
   --bs-void: #050505;
 }
 
 body.darkMode {
-  --ws-white: #0D0D0D;
-  --ws-black: #FFFFFF;
-  --ws-ink: #EAEAEA;
+  --ws-white: #0d0d0d;
+  --ws-black: #ffffff;
+  --ws-ink: #eaeaea;
 }
 
 :root {
   /* headspace */
-  --hs-lavender: #C8A4E9;
-  --hs-lilac: #A168F9;
-  --hs-mint: #9EC5E2;
-  --hs-rose: #F6C0F8;
-  --hs-peach: #F2C4A0;
-  --hs-sage: #B8D4B0;
-  --hs-cream: #FEFBFF;
+  --hs-lavender: #c8a4e9;
+  --hs-lilac: #a168f9;
+  --hs-mint: #9ec5e2;
+  --hs-rose: #f6c0f8;
+  --hs-peach: #f2c4a0;
+  --hs-sage: #b8d4b0;
+  --hs-cream: #fefbff;
 
   /* pixel accents */
-  --px-purple: #7B5EA7;
-  --px-teal: #5BB8C4;
-  --px-gold: #E8C84A;
+  --px-purple: #7b5ea7;
+  --px-teal: #5bb8c4;
+  --px-gold: #e8c84a;
 
   /* type */
-  --font-body: 'Gaegu', cursive;
-  --font-mono: 'Share Tech Mono', monospace;
-  --font-display: 'Caveat', cursive;
+  --font-body: "Gaegu", cursive;
+  --font-mono: "Share Tech Mono", monospace;
+  --font-display: "Caveat", cursive;
 
   /* borders */
   --border-node: 2px solid var(--ws-black);
@@ -53,12 +53,15 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: url('./assets/images/cursor.png'), auto;
+  cursor: url("./assets/images/cursor.png"), auto;
   overflow: hidden;
 }
 
-button, a, select, .omoriDraggable {
-  cursor: url('./assets/images/cursor.png'), pointer !important;
+button,
+a,
+select,
+.omoriDraggable {
+  cursor: url("./assets/images/cursor.png"), pointer !important;
 }
 
 /* nodes */
@@ -79,7 +82,6 @@ button, a, select, .omoriDraggable {
   transition: border 180ms ease-out;
 }
 
-
 .omoriRoomTitle {
   font-family: var(--font-body);
   font-weight: 700;
@@ -98,29 +100,29 @@ button, a, select, .omoriDraggable {
 
 /* node bg */
 .omoriRoom.input .omoriRoomTitle {
-  background: #EAEAEA; /* light gray */
+  background: #eaeaea; /* light gray */
   color: var(--ws-black);
   padding: 4px 8px;
   margin: -16px -16px 12px -16px;
   border-bottom: var(--border-node);
   border-radius: var(--radius) var(--radius) 0 0;
 }
-.omoriRoom.llm { 
-  background: #FFFFFF; /* white */
-  border: 3px solid #00CC88; /* green */
-  color: #4A3C32; /* dark brown text */
+.omoriRoom.llm {
+  background: #ffffff; /* white */
+  border: 3px solid #00cc88; /* green */
+  color: #4a3c32; /* dark brown text */
   padding: 0;
   height: 100px;
   display: flex;
   flex-direction: column;
 }
 .omoriRoom.llm .omoriRoomTitle {
-  background: #FFB4A2; /* peachy red */
-  color: #4A3C32;
+  background: #ffb4a2; /* peachy red */
+  color: #4a3c32;
   padding: 0 16px;
   margin: 0;
   height: 50%;
-  border-bottom: 3px solid #00CC88; /* border */
+  border-bottom: 3px solid #00cc88; /* border */
   box-sizing: border-box;
 }
 .omoriRoom.llm > div:last-child {
@@ -131,18 +133,18 @@ button, a, select, .omoriDraggable {
   box-sizing: border-box;
 }
 .omoriRoom.llm .omoriRoomId {
-  color: #4A3C32;
+  color: #4a3c32;
   opacity: 0.7;
 }
 
 /* handles */
 .omoriRoom.llm .react-flow__handle {
-  background: #FF5555; /* picnic red */
-  border: 2px solid #4A3C32; /* buffer */
+  background: #ff5555; /* picnic red */
+  border: 2px solid #4a3c32; /* buffer */
 }
-.omoriRoom.output { 
-  background: var(--ws-black); 
-  color: var(--ws-white); 
+.omoriRoom.output {
+  background: var(--ws-black);
+  color: var(--ws-white);
   border-color: var(--ws-white);
 }
 .omoriRoom.output .omoriRoomTitle {
@@ -165,38 +167,38 @@ button, a, select, .omoriDraggable {
   background: var(--ws-black);
   color: var(--ws-white);
 }
-.omoriRoom.text { 
-  background: #FFD5C2;
-  border-color: #3D10AD;
-  color: #3D10AD;
+.omoriRoom.text {
+  background: #ffd5c2;
+  border-color: #3d10ad;
+  color: #3d10ad;
 }
 
 .omoriRoom.text .omoriRoomTitle {
-  background: #FFF385;
-  color: #3D10AD;
+  background: #fff385;
+  color: #3d10ad;
   padding: 4px 8px;
   margin: -16px -16px 12px -16px;
-  border-bottom: 2px solid #3D10AD;
+  border-bottom: 2px solid #3d10ad;
   border-radius: var(--radius) var(--radius) 0 0;
 }
 .omoriRoom.text .omoriRoomId {
-  color: #B19DFF;
+  color: #b19dff;
 }
 .omoriRoom.text .omoriInput {
-  color: #3D10AD;
-  border-color: #3D10AD;
-  background: #FFFFFF;
+  color: #3d10ad;
+  border-color: #3d10ad;
+  background: #ffffff;
   padding: 8px;
   border-radius: var(--radius);
-  border-bottom: 2px solid #3D10AD;
+  border-bottom: 2px solid #3d10ad;
   box-sizing: border-box;
 }
 .omoriRoom.text .omoriInput:focus {
   border-bottom-width: 3px;
-  border-color: #3D10AD;
+  border-color: #3d10ad;
 }
 .omoriRoom.text .omoriInputGroup label {
-  color: #3D10AD;
+  color: #3d10ad;
 }
 
 /* Other Nodes */
@@ -222,10 +224,10 @@ button, a, select, .omoriDraggable {
   border-radius: var(--radius) var(--radius) 0 0;
 }
 .omoriRoom.note {
-  background: #FFF9CC;
+  background: #fff9cc;
 }
 .omoriRoom.note .omoriRoomTitle {
-  background: #FFE066;
+  background: #ffe066;
   padding: 4px 8px;
   margin: -16px -16px 12px -16px;
   border-bottom: var(--border-node);
@@ -241,24 +243,39 @@ button, a, select, .omoriDraggable {
 
 /* selection */
 .omoriRoom.selected::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: -6px; left: -6px; right: -6px; bottom: -6px;
-  background-image: 
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  background-image:
     linear-gradient(90deg, var(--ws-black) 50%, transparent 50%),
     linear-gradient(90deg, var(--ws-black) 50%, transparent 50%),
     linear-gradient(0deg, var(--ws-black) 50%, transparent 50%),
     linear-gradient(0deg, var(--ws-black) 50%, transparent 50%);
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  background-size: 8px 2px, 8px 2px, 2px 8px, 2px 8px;
-  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  background-size:
+    8px 2px,
+    8px 2px,
+    2px 8px,
+    2px 8px;
+  background-position:
+    0 0,
+    0 100%,
+    0 0,
+    100% 0;
   animation: border-dance 1s infinite linear;
   pointer-events: none;
 }
 
 @keyframes border-dance {
   100% {
-    background-position: 8px 0, -8px 100%, 0 -8px, 100% 8px;
+    background-position:
+      8px 0,
+      -8px 100%,
+      0 -8px,
+      100% 8px;
   }
 }
 
@@ -366,7 +383,7 @@ select.omoriInput {
   color: var(--ws-white);
   border: 2px solid var(--ws-black);
   box-shadow: inset 0 0 0 2px var(--ws-white); /* border */
-  font-family: 'OMORI_GAME', cursive;
+  font-family: "OMORI_GAME", cursive;
   font-size: 1.1rem;
   padding: 6px 20px;
   cursor: pointer;
@@ -383,7 +400,8 @@ select.omoriInput {
 /* submit */
 .omoriSparkle {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 72px;
   height: auto;
@@ -401,13 +419,13 @@ select.omoriInput {
   padding: 4px;
   box-shadow: inset 0 0 0 2px var(--ws-black);
   min-width: 120px;
-  font-family: 'OMORI_GAME', cursive;
+  font-family: "OMORI_GAME", cursive;
   font-size: 1.1rem;
 }
 
 .omori-context-menu-item {
   padding: 8px 12px;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
   color: var(--ws-black);
   transition: all 100ms ease;
 }
@@ -437,7 +455,8 @@ select.omoriInput {
   transform: scale(1.2);
 }
 
-.react-flow__connection-path, .react-flow__edge-path {
+.react-flow__connection-path,
+.react-flow__edge-path {
   stroke: var(--ws-gray-dark) !important;
   stroke-width: 1.5px !important;
   stroke-dasharray: 4 3;
@@ -464,8 +483,13 @@ select.omoriInput {
 }
 
 @keyframes cord-sway {
-  0%, 100% { transform: translateX(-50%) rotate(-0.5deg); }
-  50%       { transform: translateX(-50%) rotate(0.5deg); }
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(0.5deg);
+  }
 }
 
 .omoriLightbulb {
@@ -477,9 +501,8 @@ select.omoriInput {
   height: auto;
   image-rendering: pixelated;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
-
 
 /* whitespace box */
 .whitespace-box {
@@ -494,7 +517,7 @@ select.omoriInput {
 .whitespace-content {
   position: relative;
   width: 100%;
-  padding-top: 75%;   /* aspect ratio */
+  padding-top: 75%; /* aspect ratio */
   border: 2px solid var(--ws-black);
   border-radius: var(--radius);
   background: var(--ws-white);
@@ -514,7 +537,7 @@ select.omoriInput {
   width: 36px;
   height: auto;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
 
 /* sketchbook */
@@ -524,7 +547,7 @@ select.omoriInput {
   width: 20px;
   height: auto;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
 
 /* laptop */
@@ -534,7 +557,7 @@ select.omoriInput {
   width: 24px;
   height: auto;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
 
 /* tissuebox */
@@ -544,7 +567,7 @@ select.omoriInput {
   width: 20px;
   height: auto;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
 
 .ws-icon--cat-container {
@@ -559,7 +582,7 @@ select.omoriInput {
   width: 36px;
   height: auto;
   pointer-events: auto;
-  cursor: url('./assets/images/cursor.png'), pointer;
+  cursor: url("./assets/images/cursor.png"), pointer;
 }
 
 .ws-mewo-dialogue {
@@ -588,8 +611,11 @@ select.omoriInput {
 /* modal */
 .omori-modal-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -607,7 +633,7 @@ select.omoriInput {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 .omori-modal-header {
@@ -620,7 +646,7 @@ select.omoriInput {
 
 .omori-modal-header h3 {
   margin: 0;
-  font-family: 'OMORI_GAME', cursive;
+  font-family: "OMORI_GAME", cursive;
   font-size: 1.5rem;
 }
 
@@ -629,7 +655,7 @@ select.omoriInput {
   border: 2px solid var(--ws-white);
   color: var(--ws-white);
   cursor: pointer;
-  font-family: 'OMORI_GAME', cursive;
+  font-family: "OMORI_GAME", cursive;
   padding: 2px 8px;
 }
 
@@ -707,22 +733,42 @@ select.omoriInput {
 
 /* motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-.erasing, .erasing .react-flow__pane, .erasing .omoriRoom { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white' stroke='red' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21'/%3E%3Cpath d='M22 21H7'/%3E%3Cpath d='m5 11 9 9'/%3E%3C/svg%3E") 0 24, crosshair !important; }
+.erasing,
+.erasing .react-flow__pane,
+.erasing .omoriRoom {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white' stroke='red' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21'/%3E%3Cpath d='M22 21H7'/%3E%3Cpath d='m5 11 9 9'/%3E%3C/svg%3E")
+      0 24,
+    crosshair !important;
+}
 
 @keyframes mewoFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes doorPickerFadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Dark Mode Overrides */
@@ -730,51 +776,89 @@ body.darkMode {
   --border-node: 2px solid var(--ws-black);
   --border-active: 3px solid var(--ws-black);
 }
-body.darkMode .omoriRoom.input .omoriRoomTitle { background: #333333; }
-body.darkMode .omoriRoom.output .omoriRoomTitle { background: #E8E8E8; }
-body.darkMode .omoriRoom.llm { background: #1A1A1A; border-color: #00CC88; color: #EAEAEA; }
-body.darkMode .omoriRoom.llm .omoriRoomTitle { background: #8A433A; color: #FFFFFF; border-bottom-color: #00CC88; }
-body.darkMode .omoriRoom.llm .omoriRoomId { color: #EAEAEA; }
-body.darkMode .omoriRoom.text { background: #1A1A1A; border-color: #A168F9; color: #EAEAEA; }
-body.darkMode .omoriRoom.text .omoriRoomTitle { background: #3D10AD; color: #FFFFFF; border-bottom-color: #A168F9; }
-body.darkMode .omoriRoom.text .omoriRoomId { color: #EAEAEA; }
-body.darkMode .omoriRoom.text .omoriInput { background: #0D0D0D; color: #FFFFFF; border-color: #A168F9; }
-body.darkMode .omoriRoom.text .omoriInputGroup label { color: #A168F9; }
+body.darkMode .omoriRoom.input .omoriRoomTitle {
+  background: #333333;
+}
+body.darkMode .omoriRoom.output .omoriRoomTitle {
+  background: #e8e8e8;
+}
+body.darkMode .omoriRoom.llm {
+  background: #1a1a1a;
+  border-color: #00cc88;
+  color: #eaeaea;
+}
+body.darkMode .omoriRoom.llm .omoriRoomTitle {
+  background: #8a433a;
+  color: #ffffff;
+  border-bottom-color: #00cc88;
+}
+body.darkMode .omoriRoom.llm .omoriRoomId {
+  color: #eaeaea;
+}
+body.darkMode .omoriRoom.text {
+  background: #1a1a1a;
+  border-color: #a168f9;
+  color: #eaeaea;
+}
+body.darkMode .omoriRoom.text .omoriRoomTitle {
+  background: #3d10ad;
+  color: #ffffff;
+  border-bottom-color: #a168f9;
+}
+body.darkMode .omoriRoom.text .omoriRoomId {
+  color: #eaeaea;
+}
+body.darkMode .omoriRoom.text .omoriInput {
+  background: #0d0d0d;
+  color: #ffffff;
+  border-color: #a168f9;
+}
+body.darkMode .omoriRoom.text .omoriInputGroup label {
+  color: #a168f9;
+}
 
 /* Grayscale Overrides for Text & LLM */
-body .omoriRoom.text.grayscale, body.darkMode .omoriRoom.text.grayscale {
+body .omoriRoom.text.grayscale,
+body.darkMode .omoriRoom.text.grayscale {
   background: var(--ws-gray-light);
   border-color: var(--ws-black);
   color: var(--ws-black);
 }
-body .omoriRoom.text.grayscale .omoriRoomTitle, body.darkMode .omoriRoom.text.grayscale .omoriRoomTitle {
+body .omoriRoom.text.grayscale .omoriRoomTitle,
+body.darkMode .omoriRoom.text.grayscale .omoriRoomTitle {
   background: var(--ws-gray-mid);
   color: var(--ws-black);
   border-bottom-color: var(--ws-black);
 }
-body .omoriRoom.text.grayscale .omoriRoomId, body.darkMode .omoriRoom.text.grayscale .omoriRoomId {
+body .omoriRoom.text.grayscale .omoriRoomId,
+body.darkMode .omoriRoom.text.grayscale .omoriRoomId {
   color: var(--ws-black);
 }
-body .omoriRoom.text.grayscale .omoriInput, body.darkMode .omoriRoom.text.grayscale .omoriInput {
+body .omoriRoom.text.grayscale .omoriInput,
+body.darkMode .omoriRoom.text.grayscale .omoriInput {
   background: var(--ws-white);
   color: var(--ws-black);
   border-color: var(--ws-black);
 }
-body .omoriRoom.text.grayscale .omoriInputGroup label, body.darkMode .omoriRoom.text.grayscale .omoriInputGroup label {
+body .omoriRoom.text.grayscale .omoriInputGroup label,
+body.darkMode .omoriRoom.text.grayscale .omoriInputGroup label {
   color: var(--ws-black);
 }
 
-body .omoriRoom.llm.grayscale, body.darkMode .omoriRoom.llm.grayscale {
+body .omoriRoom.llm.grayscale,
+body.darkMode .omoriRoom.llm.grayscale {
   background: var(--ws-gray-dark);
   border-color: var(--ws-white);
   color: var(--ws-white);
 }
-body .omoriRoom.llm.grayscale .omoriRoomTitle, body.darkMode .omoriRoom.llm.grayscale .omoriRoomTitle {
+body .omoriRoom.llm.grayscale .omoriRoomTitle,
+body.darkMode .omoriRoom.llm.grayscale .omoriRoomTitle {
   background: var(--ws-black);
   color: var(--ws-white);
   border-bottom-color: var(--ws-white);
 }
-body .omoriRoom.llm.grayscale .omoriRoomId, body.darkMode .omoriRoom.llm.grayscale .omoriRoomId {
+body .omoriRoom.llm.grayscale .omoriRoomId,
+body.darkMode .omoriRoom.llm.grayscale .omoriRoomId {
   color: var(--ws-white);
 }
 

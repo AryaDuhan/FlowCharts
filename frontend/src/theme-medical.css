@@ -1,17 +1,17 @@
 /* theme-medical.css */
 
 body.theme-medical {
-  --ws-white: #FFFFFF;
-  --ws-black: #2C4F94;
-  
-  background-color: #FFFFFF;
+  --ws-white: #ffffff;
+  --ws-black: #2c4f94;
+
+  background-color: #ffffff;
   color: #333333;
-  
+
   /* Fonts */
-  --font-body: 'Montserrat', sans-serif;
-  --font-mono: 'Montserrat', sans-serif;
-  --font-display: 'Montserrat', sans-serif;
-  
+  --font-body: "Montserrat", sans-serif;
+  --font-mono: "Montserrat", sans-serif;
+  --font-display: "Montserrat", sans-serif;
+
   cursor: default;
 }
 
@@ -22,8 +22,8 @@ body.theme-medical .react-flow {
 
 /* Base Node */
 body.theme-medical .omoriRoom {
-  background-color: #26BDE6;
-  color: #FFFFFF;
+  background-color: #26bde6;
+  color: #ffffff;
   border: none;
   border-radius: 0px;
   box-shadow: none;
@@ -35,8 +35,8 @@ body.theme-medical .omoriRoomTitle {
   font-weight: 700;
   text-transform: uppercase;
   background: transparent !important;
-  color: #FFFFFF !important;
-  border-bottom: 2px solid rgba(255,255,255,0.3) !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
   margin: -16px -16px 12px -16px;
   padding: 10px 12px;
 }
@@ -44,58 +44,79 @@ body.theme-medical .omoriRoomTitle {
 body.theme-medical .omoriRoomId {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Inputs */
 body.theme-medical .omoriInput {
   font-family: var(--font-body);
   border: none;
-  background: #FFFFFF;
+  background: #ffffff;
   color: #333333;
   border-radius: 0;
 }
 body.theme-medical select.omoriInput option {
-  background: #FFFFFF;
+  background: #ffffff;
   color: #333333;
 }
 
 /* Toolbar / Pipeline */
 body.theme-medical .omoriDialogue {
-  background: #FFFFFF;
-  border: 2px solid #2C4F94;
+  background: #ffffff;
+  border: 2px solid #2c4f94;
   border-radius: 0;
 }
 body.theme-medical .omoriDraggable {
-  background: #26BDE6;
-  color: #FFFFFF;
+  background: #26bde6;
+  color: #ffffff;
   border: none;
   border-radius: 0;
 }
 body.theme-medical .omoriDialogueSpeaker {
-  color: #2C4F94;
+  color: #2c4f94;
 }
 
 /* Specific Nodes */
 body.theme-medical .omoriRoom.llm,
 body.theme-medical .omoriRoom.input {
-  background-color: #2C4F94;
-  color: #FFFFFF;
+  background-color: #2c4f94;
+  color: #ffffff;
 }
 
-body.theme-medical .omoriRoom.output { background-color: #1A3668; }
-body.theme-medical .omoriRoom.text { background-color: #FFFFFF; border: 2px solid #2C4F94; color: #2C4F94; }
-body.theme-medical .omoriRoom.text .omoriRoomTitle { color: #2C4F94 !important; border-bottom-color: #2C4F94 !important; }
-body.theme-medical .omoriRoom.text .omoriInput { border: 1px solid #2C4F94; }
+body.theme-medical .omoriRoom.output {
+  background-color: #1a3668;
+}
+body.theme-medical .omoriRoom.text {
+  background-color: #ffffff;
+  border: 2px solid #2c4f94;
+  color: #2c4f94;
+}
+body.theme-medical .omoriRoom.text .omoriRoomTitle {
+  color: #2c4f94 !important;
+  border-bottom-color: #2c4f94 !important;
+}
+body.theme-medical .omoriRoom.text .omoriInput {
+  border: 1px solid #2c4f94;
+}
 
-body.theme-medical .omoriRoom.api { background-color: #4CAF50; }
-body.theme-medical .omoriRoom.logic { background-color: #9C27B0; }
-body.theme-medical .omoriRoom.math { background-color: #FF9800; }
-body.theme-medical .omoriRoom.note { background-color: #F44336; }
-body.theme-medical .omoriRoom.timer { background-color: #607D8B; }
+body.theme-medical .omoriRoom.api {
+  background-color: #4caf50;
+}
+body.theme-medical .omoriRoom.logic {
+  background-color: #9c27b0;
+}
+body.theme-medical .omoriRoom.math {
+  background-color: #ff9800;
+}
+body.theme-medical .omoriRoom.note {
+  background-color: #f44336;
+}
+body.theme-medical .omoriRoom.timer {
+  background-color: #607d8b;
+}
 
 /* Edges */
-body.theme-medical .react-flow__connection-path, 
+body.theme-medical .react-flow__connection-path,
 body.theme-medical .react-flow__edge-path {
   stroke: #333333 !important;
   stroke-width: 2px !important;
@@ -103,53 +124,53 @@ body.theme-medical .react-flow__edge-path {
 body.theme-medical .react-flow__handle {
   border-radius: 0;
   border: 2px solid #333333;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 12px;
   height: 12px;
 }
 
 /* UI Elements */
 body.theme-medical .omoriNav {
-  background: #FFFFFF;
-  border: 2px solid #2C4F94;
+  background: #ffffff;
+  border: 2px solid #2c4f94;
   border-radius: 0;
   box-shadow: none;
 }
 body.theme-medical .omoriNavBtn {
   border-radius: 0;
-  color: #2C4F94;
+  color: #2c4f94;
 }
 body.theme-medical .omoriNavBtn:hover {
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 body.theme-medical .omoriNavBtn.active {
-  background: #2C4F94;
-  color: #FFFFFF;
+  background: #2c4f94;
+  color: #ffffff;
 }
 body.theme-medical .omoriNavDivider {
-  background: #2C4F94;
+  background: #2c4f94;
   width: 2px;
 }
 
 body.theme-medical .react-flow__minimap {
-  border: 2px solid #2C4F94 !important;
+  border: 2px solid #2c4f94 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: #FFFFFF !important;
+  background: #ffffff !important;
 }
 
 body.theme-medical .omori-context-menu {
-  background: #FFFFFF;
-  border: 2px solid #2C4F94;
+  background: #ffffff;
+  border: 2px solid #2c4f94;
   border-radius: 0;
-  box-shadow: 4px 4px 0px rgba(44,79,148,0.2);
+  box-shadow: 4px 4px 0px rgba(44, 79, 148, 0.2);
 }
 body.theme-medical .omori-context-menu-item {
-  color: #2C4F94;
+  color: #2c4f94;
 }
 body.theme-medical .omori-context-menu-item:hover {
-  background: #2C4F94;
-  color: #FFFFFF;
+  background: #2c4f94;
+  color: #ffffff;
 }
 
 /* Hide Omori-specific elements */

@@ -2,74 +2,99 @@ import { useEffect, useRef, useCallback } from "react";
 import { useStore } from "./store";
 
 // constants
-const GRID_SIZE         = 28;
-const DOT_RADIUS        = 1.5;
-const CURSOR_RADIUS     = 90;
-const CURSOR_STRENGTH   = 20;
-const BOX_MARGIN        = 14;
-const BOX_PUSH_RADIUS   = 80;
+const GRID_SIZE = 28;
+const DOT_RADIUS = 1.5;
+const CURSOR_RADIUS = 90;
+const CURSOR_STRENGTH = 20;
+const BOX_MARGIN = 14;
+const BOX_PUSH_RADIUS = 80;
 const BOX_PUSH_STRENGTH = 20;
-const LERP_SPEED        = 0.09;
-const FLICKER_CHANCE    = 0.0008;
+const LERP_SPEED = 0.09;
+const FLICKER_CHANCE = 0.0008;
 
 function getColors(isDark, theme) {
-    if (theme === 'neo-brutalist') {
-        if (isDark) return { base: "#222222", dim: "#222222", lit: () => "#444444" };
-        return { base: "rgba(0,0,0,0.15)", dim: "rgba(0,0,0,0.05)", lit: () => "rgba(0,0,0,0.3)" };
-    }
-    if (theme === 'editorial') {
-        return { base: "rgba(217,211,197,0.4)", dim: "rgba(217,211,197,0.1)", lit: () => "rgba(91,72,36,0.2)" };
-    }
-    if (theme === 'corporate') {
-        return { base: "rgba(255,255,255,0.05)", dim: "rgba(255,255,255,0.02)", lit: () => "rgba(249,224,85,0.3)" };
-    }
-    if (theme === 'playful') {
-        return { base: "rgba(59,66,196,0.1)", dim: "rgba(59,66,196,0.03)", lit: () => "rgba(220,136,218,0.4)" };
-    }
-    if (theme === 'wireframe') {
-        return { base: "rgba(123,178,229,0.15)", dim: "rgba(123,178,229,0.05)", lit: () => "rgba(252,182,36,0.3)" };
-    }
-    if (theme === 'medical') {
-        return { base: "rgba(44,79,148,0.1)", dim: "rgba(44,79,148,0.03)", lit: () => "rgba(38,189,230,0.3)" };
-    }
-    
-    // Default Omori
-    if (isDark) {
-        return {
-            base: "rgba(220, 220, 220, 0.13)",
-            dim: "rgba(220, 220, 220, 0.04)",
-            lit: (t) => {
-                const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
-                return `rgba(255, 255, 255, ${op.toFixed(3)})`;
-            }
-        };
-    }
+  if (theme === "neo-brutalist") {
+    if (isDark)
+      return { base: "#222222", dim: "#222222", lit: () => "#444444" };
     return {
-        base: "rgba(30,28,24,0.13)",
-        dim: "rgba(30,28,24,0.04)",
-        lit: (t) => {
-            const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
-            return `rgba(20,18,14,${op.toFixed(3)})`;
-        }
+      base: "rgba(0,0,0,0.15)",
+      dim: "rgba(0,0,0,0.05)",
+      lit: () => "rgba(0,0,0,0.3)",
     };
+  }
+  if (theme === "editorial") {
+    return {
+      base: "rgba(217,211,197,0.4)",
+      dim: "rgba(217,211,197,0.1)",
+      lit: () => "rgba(91,72,36,0.2)",
+    };
+  }
+  if (theme === "corporate") {
+    return {
+      base: "rgba(255,255,255,0.05)",
+      dim: "rgba(255,255,255,0.02)",
+      lit: () => "rgba(249,224,85,0.3)",
+    };
+  }
+  if (theme === "playful") {
+    return {
+      base: "rgba(59,66,196,0.1)",
+      dim: "rgba(59,66,196,0.03)",
+      lit: () => "rgba(220,136,218,0.4)",
+    };
+  }
+  if (theme === "wireframe") {
+    return {
+      base: "rgba(123,178,229,0.15)",
+      dim: "rgba(123,178,229,0.05)",
+      lit: () => "rgba(252,182,36,0.3)",
+    };
+  }
+  if (theme === "medical") {
+    return {
+      base: "rgba(44,79,148,0.1)",
+      dim: "rgba(44,79,148,0.03)",
+      lit: () => "rgba(38,189,230,0.3)",
+    };
+  }
+
+  // Default Omori
+  if (isDark) {
+    return {
+      base: "rgba(220, 220, 220, 0.13)",
+      dim: "rgba(220, 220, 220, 0.04)",
+      lit: (t) => {
+        const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
+        return `rgba(255, 255, 255, ${op.toFixed(3)})`;
+      },
+    };
+  }
+  return {
+    base: "rgba(30,28,24,0.13)",
+    dim: "rgba(30,28,24,0.04)",
+    lit: (t) => {
+      const op = 0.13 + 0.18 * Math.min(t * 1.4, 1);
+      return `rgba(20,18,14,${op.toFixed(3)})`;
+    },
+  };
 }
 
 // background component
 export default function OmoriDotBackground({ boxes = [], style, className }) {
   const canvasRef = useRef(null);
-  const stateRef  = useRef({
-    dots:  [],
+  const stateRef = useRef({
+    dots: [],
     mouse: { x: -9999, y: -9999 },
     boxes: [],
-    dpr:   1,
+    dpr: 1,
     w: 0,
     h: 0,
     isDarkMode: false,
-    theme: 'omori',
+    theme: "omori",
   });
-  const isDarkMode = useStore(state => state.isDarkMode);
-  const theme = useStore(state => state.theme);
-  
+  const isDarkMode = useStore((state) => state.isDarkMode);
+  const theme = useStore((state) => state.theme);
+
   useEffect(() => {
     stateRef.current.isDarkMode = isDarkMode;
     stateRef.current.theme = theme;
@@ -84,8 +109,13 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     for (let r = 0; r < rows; r++)
       for (let c = 0; c < cols; c++)
         dots.push({
-          ox: c * GRID_SIZE, oy: r * GRID_SIZE,
-          dx: 0, dy: 0, tdx: 0, tdy: 0, flicker: 0,
+          ox: c * GRID_SIZE,
+          oy: r * GRID_SIZE,
+          dx: 0,
+          dy: 0,
+          tdx: 0,
+          tdy: 0,
+          flicker: 0,
         });
     return dots;
   }, []);
@@ -102,7 +132,7 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
       // Size to the full viewport since we're position:fixed
       const w = window.innerWidth;
       const h = window.innerHeight;
-      canvas.width  = w * s.dpr;
+      canvas.width = w * s.dpr;
       canvas.height = h * s.dpr;
       s.w = w;
       s.h = h;
@@ -115,21 +145,31 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     const ctx = canvas.getContext("2d");
 
     const tick = () => {
-      const colors = getColors(stateRef.current.isDarkMode, stateRef.current.theme);
+      const colors = getColors(
+        stateRef.current.isDarkMode,
+        stateRef.current.theme,
+      );
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Read node positions straight from the DOM every frame
       // getBoundingClientRect gives us screen coords which match our canvas
-      const nodeEls = document.querySelectorAll('.react-flow__node:not(.react-flow__node-drawing)');
+      const nodeEls = document.querySelectorAll(
+        ".react-flow__node:not(.react-flow__node-drawing)",
+      );
       const liveBoxes = [];
-      nodeEls.forEach(el => {
+      nodeEls.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        liveBoxes.push({ x: rect.left, y: rect.top, width: rect.width, height: rect.height });
+        liveBoxes.push({
+          x: rect.left,
+          y: rect.top,
+          width: rect.width,
+          height: rect.height,
+        });
       });
 
       // Sample points along edge paths so links also displace dots
-      const edgePaths = document.querySelectorAll('.react-flow__edge-path');
-      edgePaths.forEach(path => {
+      const edgePaths = document.querySelectorAll(".react-flow__edge-path");
+      edgePaths.forEach((path) => {
         try {
           const svg = path.ownerSVGElement;
           if (!svg) return;
@@ -141,21 +181,33 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
             const pt = path.getPointAtLength(d);
             const sx = pt.x * ctm.a + ctm.e;
             const sy = pt.y * ctm.d + ctm.f;
-            liveBoxes.push({ x: sx - 2, y: sy - 2, width: 4, height: 4, isEdge: true });
+            liveBoxes.push({
+              x: sx - 2,
+              y: sy - 2,
+              width: 4,
+              height: 4,
+              isEdge: true,
+            });
           }
-        } catch (e) { /* skip broken paths */ }
+        } catch (e) {
+          /* skip broken paths */
+        }
       });
 
       s.boxes = liveBoxes;
 
       const { dots, mouse, boxes: bxs, dpr } = s;
-      const mx = mouse.x, my = mouse.y;
+      const mx = mouse.x,
+        my = mouse.y;
 
       for (const dot of dots) {
         // cursor
-        const cdx = dot.ox - mx, cdy = dot.oy - my;
-        const cd  = Math.sqrt(cdx * cdx + cdy * cdy);
-        let cpx = 0, cpy = 0, lit = 0;
+        const cdx = dot.ox - mx,
+          cdy = dot.oy - my;
+        const cd = Math.sqrt(cdx * cdx + cdy * cdy);
+        let cpx = 0,
+          cpy = 0,
+          lit = 0;
         if (cd < CURSOR_RADIUS && cd > 0.5) {
           const t = 1 - cd / CURSOR_RADIUS;
           const f = t * t * CURSOR_STRENGTH;
@@ -165,30 +217,38 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
         }
 
         // nodes
-        let bpx = 0, bpy = 0, inside = false;
+        let bpx = 0,
+          bpy = 0,
+          inside = false;
         let maxT = 0;
         for (const b of bxs) {
-          const m      = b.isEdge ? 8 : BOX_MARGIN;
-          const pushR  = b.isEdge ? 40 : BOX_PUSH_RADIUS;
-          const pushS  = b.isEdge ? 12 : BOX_PUSH_STRENGTH;
+          const m = b.isEdge ? 8 : BOX_MARGIN;
+          const pushR = b.isEdge ? 40 : BOX_PUSH_RADIUS;
+          const pushS = b.isEdge ? 12 : BOX_PUSH_STRENGTH;
 
-          const L = b.x - m,   R = b.x + b.width  + m;
-          const T = b.y - m,   B = b.y + b.height + m;
+          const L = b.x - m,
+            R = b.x + b.width + m;
+          const T = b.y - m,
+            B = b.y + b.height + m;
 
           if (dot.ox >= L && dot.ox <= R && dot.oy >= T && dot.oy <= B) {
-            inside = true; break;
+            inside = true;
+            break;
           }
 
-          const SL = L - pushR, SR = R + pushR;
-          const ST = T - pushR, SB = B + pushR;
+          const SL = L - pushR,
+            SR = R + pushR;
+          const ST = T - pushR,
+            SB = B + pushR;
 
           if (dot.ox >= SL && dot.ox <= SR && dot.oy >= ST && dot.oy <= SB) {
-            const nx  = Math.max(L, Math.min(R, dot.ox));
-            const ny  = Math.max(T, Math.min(B, dot.oy));
-            const edx = dot.ox - nx, edy = dot.oy - ny;
-            const ed  = Math.sqrt(edx * edx + edy * edy) || 0.01;
+            const nx = Math.max(L, Math.min(R, dot.ox));
+            const ny = Math.max(T, Math.min(B, dot.oy));
+            const edx = dot.ox - nx,
+              edy = dot.oy - ny;
+            const ed = Math.sqrt(edx * edx + edy * edy) || 0.01;
 
-            const t     = 1 - (ed / pushR);
+            const t = 1 - ed / pushR;
             if (t > maxT) {
               maxT = t;
               const force = t * t * pushS;
@@ -200,8 +260,8 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
 
         dot.tdx = inside ? 0 : cpx + bpx;
         dot.tdy = inside ? 0 : cpy + bpy;
-        dot.dx  += (dot.tdx - dot.dx) * LERP_SPEED;
-        dot.dy  += (dot.tdy - dot.dy) * LERP_SPEED;
+        dot.dx += (dot.tdx - dot.dx) * LERP_SPEED;
+        dot.dy += (dot.tdy - dot.dy) * LERP_SPEED;
 
         if (dot.flicker > 0) dot.flicker--;
         else if (Math.random() < FLICKER_CHANCE)
@@ -213,10 +273,16 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
         ctx.arc(
           (dot.ox + dot.dx) * dpr,
           (dot.oy + dot.dy) * dpr,
-          DOT_RADIUS * dpr, 0, Math.PI * 2
+          DOT_RADIUS * dpr,
+          0,
+          Math.PI * 2,
         );
         ctx.fillStyle =
-          dot.flicker > 0 ? colors.dim : lit > 0.05 ? colors.lit(lit) : colors.base;
+          dot.flicker > 0
+            ? colors.dim
+            : lit > 0.05
+              ? colors.lit(lit)
+              : colors.base;
         ctx.fill();
       }
 
@@ -224,7 +290,10 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
     };
 
     rafRef.current = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", resize); };
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", resize);
+    };
   }, [buildGrid]);
 
   // mouse tracking

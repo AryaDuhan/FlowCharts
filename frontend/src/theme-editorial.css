@@ -1,17 +1,17 @@
 /* theme-editorial.css */
 
 body.theme-editorial {
-  --ws-white: #FFFEFB;
-  --ws-black: #0F131A;
-  
-  background-color: #FFFEFB;
-  color: #0F131A;
-  
+  --ws-white: #fffefb;
+  --ws-black: #0f131a;
+
+  background-color: #fffefb;
+  color: #0f131a;
+
   /* Fonts */
-  --font-body: 'Inter Tight', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Newsreader', serif;
-  
+  --font-body: "Inter Tight", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Newsreader", serif;
+
   cursor: default;
 }
 
@@ -22,18 +22,18 @@ body.theme-editorial .react-flow {
 
 /* Base Node */
 body.theme-editorial .omoriRoom {
-  background-color: #FFFEFB;
-  color: #0F131A;
-  border-right: 1px solid #D9D3C5;
-  border-bottom: 1px solid #D9D3C5;
-  border-left: 1px solid #E8E5DF;
-  border-top: 1px solid #E8E5DF;
+  background-color: #fffefb;
+  color: #0f131a;
+  border-right: 1px solid #d9d3c5;
+  border-bottom: 1px solid #d9d3c5;
+  border-left: 1px solid #e8e5df;
+  border-top: 1px solid #e8e5df;
   border-radius: 0px;
   box-shadow: none;
   font-family: var(--font-body);
 }
 body.theme-editorial .omoriRoom:hover {
-  background-color: rgba(20,19,15,0.025);
+  background-color: rgba(20, 19, 15, 0.025);
   box-shadow: none;
   transform: none;
 }
@@ -43,8 +43,8 @@ body.theme-editorial .omoriRoomTitle {
   font-weight: 700;
   font-style: italic;
   background: transparent !important;
-  color: #0F131A !important;
-  border-bottom: 1px solid #D9D3C5 !important;
+  color: #0f131a !important;
+  border-bottom: 1px solid #d9d3c5 !important;
   margin: -16px -16px 12px -16px;
   padding: 8px 12px;
 }
@@ -54,124 +54,135 @@ body.theme-editorial .omoriRoomId {
   font-size: 0.6rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #8B867D;
+  color: #8b867d;
 }
 
 /* Inputs */
 body.theme-editorial .omoriInput {
   font-family: var(--font-body);
   border: none;
-  border-bottom: 1px solid #0F131A;
+  border-bottom: 1px solid #0f131a;
   background: transparent;
-  color: #0F131A;
+  color: #0f131a;
   border-radius: 0;
 }
 body.theme-editorial select.omoriInput option {
-  background: #FFFEFB;
-  color: #0F131A;
+  background: #fffefb;
+  color: #0f131a;
 }
 
 /* Toolbar / Pipeline */
 body.theme-editorial .omoriDialogue {
-  background: #FFFEFB;
-  border: 1px solid #D9D3C5;
+  background: #fffefb;
+  border: 1px solid #d9d3c5;
   border-radius: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 body.theme-editorial .omoriDraggable {
-  background: #FFFEFB;
-  color: #0F131A;
-  border: 1px solid #D9D3C5;
+  background: #fffefb;
+  color: #0f131a;
+  border: 1px solid #d9d3c5;
   border-radius: 0;
 }
 body.theme-editorial .omoriDialogueSpeaker {
-  color: #0F131A;
+  color: #0f131a;
 }
 
 /* Specific Nodes */
 body.theme-editorial .omoriRoom.llm {
-  background-color: #FBF9F4;
-  border-left: 3px solid #5B4824;
+  background-color: #fbf9f4;
+  border-left: 3px solid #5b4824;
 }
 
 body.theme-editorial .omoriRoom.output {
-  background-color: #0F131A;
-  color: #FFFEFB;
-  border-left: 3px solid #C5A562;
+  background-color: #0f131a;
+  color: #fffefb;
+  border-left: 3px solid #c5a562;
 }
 body.theme-editorial .omoriRoom.output .omoriRoomTitle {
-  color: #FFFEFB !important;
-  border-bottom: 1px solid #20242C !important;
+  color: #fffefb !important;
+  border-bottom: 1px solid #20242c !important;
 }
 
 body.theme-editorial .omoriRoom.text {
-  background-color: #FCF9F0;
-  border-left: 3px solid #BFB7A4;
+  background-color: #fcf9f0;
+  border-left: 3px solid #bfb7a4;
 }
 
 body.theme-editorial .omoriRoom.input {
-  border-left: 3px solid #D9D3C5;
+  border-left: 3px solid #d9d3c5;
 }
 
 /* API, Logic, Math, Note, Timer */
-body.theme-editorial .omoriRoom.api { border-left: 3px solid #4A5A70; }
-body.theme-editorial .omoriRoom.logic { border-left: 3px solid #6A5265; }
-body.theme-editorial .omoriRoom.math { border-left: 3px solid #526A59; }
-body.theme-editorial .omoriRoom.note { background-color: #FCF9F0; border-left: 3px solid #C5A562; }
-body.theme-editorial .omoriRoom.timer { border-left: 3px solid #8A6D4B; }
+body.theme-editorial .omoriRoom.api {
+  border-left: 3px solid #4a5a70;
+}
+body.theme-editorial .omoriRoom.logic {
+  border-left: 3px solid #6a5265;
+}
+body.theme-editorial .omoriRoom.math {
+  border-left: 3px solid #526a59;
+}
+body.theme-editorial .omoriRoom.note {
+  background-color: #fcf9f0;
+  border-left: 3px solid #c5a562;
+}
+body.theme-editorial .omoriRoom.timer {
+  border-left: 3px solid #8a6d4b;
+}
 
 /* Edges */
-body.theme-editorial .react-flow__connection-path, 
+body.theme-editorial .react-flow__connection-path,
 body.theme-editorial .react-flow__edge-path {
-  stroke: #BFB7A4 !important;
+  stroke: #bfb7a4 !important;
   stroke-width: 1.5px !important;
 }
 body.theme-editorial .react-flow__handle {
   border-radius: 0;
-  border: 1px solid #5B4824;
-  background: #FFFEFB;
+  border: 1px solid #5b4824;
+  background: #fffefb;
   width: 10px;
   height: 10px;
 }
 
 /* UI Elements */
 body.theme-editorial .omoriNav {
-  background: #FFFEFB;
-  border: 1px solid #D9D3C5;
+  background: #fffefb;
+  border: 1px solid #d9d3c5;
   border-radius: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 body.theme-editorial .omoriNavBtn {
   border-radius: 0;
-  color: #0F131A;
+  color: #0f131a;
 }
 body.theme-editorial .omoriNavBtn:hover {
-  background: #FBF9F4;
+  background: #fbf9f4;
 }
 body.theme-editorial .omoriNavBtn.active {
-  background: #FBF9F4;
-  border-bottom: 2px solid #5B4824;
+  background: #fbf9f4;
+  border-bottom: 2px solid #5b4824;
 }
 body.theme-editorial .omoriNavDivider {
-  background: #D9D3C5;
+  background: #d9d3c5;
   width: 1px;
 }
 
 body.theme-editorial .react-flow__minimap {
-  border: 1px solid #D9D3C5 !important;
+  border: 1px solid #d9d3c5 !important;
   border-radius: 0 !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
-  background: #FFFEFB !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  background: #fffefb !important;
 }
 
 body.theme-editorial .omori-context-menu {
-  background: #FFFEFB;
-  border: 1px solid #D9D3C5;
+  background: #fffefb;
+  border: 1px solid #d9d3c5;
   border-radius: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 body.theme-editorial .omori-context-menu-item:hover {
-  background: #FBF9F4;
+  background: #fbf9f4;
 }
 
 /* Hide Omori-specific elements */
