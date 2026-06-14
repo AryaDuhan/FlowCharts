@@ -3,10 +3,7 @@
 import { Handle, Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
 
-import { useStore } from '../store';
-
 export const LLMNode = ({ id, data, selected }) => {
-  const updateNodeField = useStore((state) => state.updateNodeField);
 
   return (
     <BaseNode id={id} type="llm" title="LLM" data={data} selected={selected}>

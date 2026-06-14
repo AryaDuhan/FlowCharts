@@ -95,7 +95,7 @@ export default function OmoriDotBackground({ boxes = [], style, className }) {
 
       // Read node positions straight from the DOM every frame
       // getBoundingClientRect gives us screen coords which match our canvas
-      const nodeEls = document.querySelectorAll('.react-flow__node');
+      const nodeEls = document.querySelectorAll('.react-flow__node:not(.react-flow__node-drawing)');
       const liveBoxes = [];
       nodeEls.forEach(el => {
         const rect = el.getBoundingClientRect();

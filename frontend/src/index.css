@@ -62,8 +62,9 @@ button, a, select, .omoriDraggable {
 }
 
 /* nodes */
-.react-flow__node-drawing {
+.react-flow__node.react-flow__node-drawing {
   background: transparent !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }

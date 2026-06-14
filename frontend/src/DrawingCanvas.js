@@ -5,7 +5,6 @@ import { useReactFlow } from 'reactflow';
 export const DrawingCanvas = () => {
     const activeTool = useStore(state => state.activeTool);
     const drawingColor = useStore(state => state.drawingColor);
-    const setDrawingColor = useStore(state => state.setDrawingColor);
     const addNode = useStore(state => state.addNode);
     const getNodeID = useStore(state => state.getNodeID);
     

@@ -117,6 +117,51 @@ export const useStore = create((set, get) => ({
         }),
       });
     },
+    clipboard: { nodes: [], edges: [] },
+    copySelection: () => {
+        const { nodes, edges } = get();
+        const selectedNodes = nodes.filter(n => n.selected);
+        const selectedEdges = edges.filter(e => e.selected);
+        if (selectedNodes.length > 0 || selectedEdges.length > 0) {
+            set({ clipboard: { nodes: selectedNodes, edges: selectedEdges } });
+        }
+    },
+    pasteSelection: () => {
+        const { clipboard, nodes, edges, getNodeID } = get();
+        if (clipboard.nodes.length === 0 && clipboard.edges.length === 0) return;
+
+        get().saveState();
+
+        const idMap = {};
+        const newNodes = clipboard.nodes.map(node => {
+            const newId = getNodeID(node.type);
+            idMap[node.id] = newId;
+            return {
+                ...node,
+                id: newId,
+                position: { x: node.position.x + 20, y: node.position.y + 20 },
+                selected: true,
+            };
+        });
+
+        const newEdges = clipboard.edges.map(edge => {
+            const newSource = idMap[edge.source] || edge.source;
+            const newTarget = idMap[edge.target] || edge.target;
+            
+            return {
+                ...edge,
+                id: `reactflow__edge-${newSource}${edge.sourceHandle ? '-' + edge.sourceHandle : ''}-${newTarget}${edge.targetHandle ? '-' + edge.targetHandle : ''}-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+                source: newSource,
+                target: newTarget,
+                selected: true,
+            };
+        });
+
+        const updatedNodes = nodes.map(n => ({ ...n, selected: false })).concat(newNodes);
+        const updatedEdges = edges.map(e => ({ ...e, selected: false })).concat(newEdges);
+
+        set({ nodes: updatedNodes, edges: updatedEdges });
+    },
     clearAll: () => {
       get().saveState();
       set({ nodes: [], edges: [] });

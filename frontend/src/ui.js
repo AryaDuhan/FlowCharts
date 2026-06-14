@@ -547,7 +547,6 @@ export const PipelineUI = () => {
     };
 
     const [menu, setMenu] = useState(null);
-    const [clipboard, setClipboard] = useState(null);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -561,32 +560,15 @@ export const PipelineUI = () => {
                     e.preventDefault();
                     useStore.getState().redo();
                 } else if (e.key === 'c') {
-                    const state = useStore.getState();
-                    const selectedNode = state.nodes.find(n => n.selected);
-                    if (selectedNode) {
-                        setClipboard(selectedNode);
-                        console.log('Copied to clipboard:', selectedNode.id);
-                    }
+                    useStore.getState().copySelection();
                 } else if (e.key === 'v') {
-                    if (clipboard) {
-                        const state = useStore.getState();
-                        state.saveState();
-                        const newId = state.getNodeID(clipboard.type);
-                        const newNode = {
-                          ...clipboard,
-                          id: newId,
-                          selected: false,
-                          position: { x: clipboard.position.x + 50, y: clipboard.position.y + 50 },
-                          data: { ...clipboard.data, id: newId, locked: false }
-                        };
-                        state.addNode(newNode);
-                    }
+                    useStore.getState().pasteSelection();
                 }
             }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [clipboard]);
+    }, []);
 
     const onPaneContextMenu = useCallback(
       (event) => {
@@ -651,29 +633,22 @@ export const PipelineUI = () => {
     };
 
     const handleCopy = () => {
-      if (!menu || menu.type !== 'node') return;
-      const state = useStore.getState();
-      const nodeToCopy = state.nodes.find(n => n.id === menu.id);
-      if (nodeToCopy) setClipboard(nodeToCopy);
+      if (!menu) return;
+      if (menu.type === 'selection') {
+          useStore.getState().copySelection();
+      } else if (menu.type === 'node') {
+          const state = useStore.getState();
+          const nodeToCopy = state.nodes.find(n => n.id === menu.id);
+          if (nodeToCopy) {
+              useStore.setState({ clipboard: { nodes: [nodeToCopy], edges: [] } });
+          }
+      }
       setMenu(null);
     };
 
     const handlePaste = () => {
-      if (!clipboard) return;
-      const state = useStore.getState();
-      state.saveState();
-      const newId = state.getNodeID(clipboard.type);
-      const newNode = {
-        ...clipboard,
-        id: newId,
-        selected: true,
-        position: reactFlowInstance ? reactFlowInstance.project({
-            x: menu.left,
-            y: menu.top - 60,
-        }) : { x: clipboard.position.x + 50, y: clipboard.position.y + 50 },
-        data: { ...clipboard.data, id: newId, locked: false }
-      };
-      state.addNode(newNode);
+      // Just rely on the store's robust paste logic which handles multiple nodes, edges, and links!
+      useStore.getState().pasteSelection();
       setMenu(null);
     };
 
@@ -692,20 +667,17 @@ export const PipelineUI = () => {
     };
 
     const handleDuplicate = () => {
-      if (!menu || menu.type !== 'node') return;
-      const state = useStore.getState();
-      const nodeToCopy = state.nodes.find(n => n.id === menu.id);
-      if (nodeToCopy) {
-        state.saveState();
-        const newId = state.getNodeID(nodeToCopy.type);
-        const newNode = {
-          ...nodeToCopy,
-          id: newId,
-          selected: false,
-          position: { x: nodeToCopy.position.x + 50, y: nodeToCopy.position.y + 50 },
-          data: { ...nodeToCopy.data, id: newId, locked: false }
-        };
-        state.addNode(newNode);
+      if (!menu) return;
+      if (menu.type === 'selection') {
+          useStore.getState().copySelection();
+          useStore.getState().pasteSelection();
+      } else if (menu.type === 'node') {
+          const state = useStore.getState();
+          const nodeToCopy = state.nodes.find(n => n.id === menu.id);
+          if (nodeToCopy) {
+            useStore.setState({ clipboard: { nodes: [nodeToCopy], edges: [] } });
+            useStore.getState().pasteSelection();
+          }
       }
       setMenu(null);
     };
@@ -723,7 +695,7 @@ export const PipelineUI = () => {
         <button 
             className="omoriNavBtn" 
             onClick={toggleTheme} 
-            style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 10 }}
+            style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 10, border: '2px solid var(--ws-black)', background: 'var(--ws-white)' }}
             title="Toggle Theme"
         >
             {isDarkMode ? (
@@ -789,7 +761,6 @@ export const PipelineUI = () => {
                 onEdgeContextMenu={onEdgeContextMenu}
                 onPaneContextMenu={onPaneContextMenu}
                 onSelectionContextMenu={onSelectionContextMenu}
-                onInit={setReactFlowInstance}
                 nodeTypes={nodeTypes}
                 edgeTypes={edgeTypes}
                 proOptions={proOptions}
@@ -807,8 +778,20 @@ export const PipelineUI = () => {
             >
                 <Background color="transparent" gap={gridSize} size={0} />
                 <MiniMap
-                    style={{ border: '2px solid #0D0D0D', borderRadius: '2px' }}
-                    nodeColor={() => '#A2A0A0'}
+                    style={{ border: '2px solid #0D0D0D', borderRadius: '2px', backgroundColor: isDarkMode ? '#050505' : '#FFFFFF' }}
+                    nodeColor={(node) => {
+                        if (node.type === 'drawing') return 'transparent';
+                        if (node.type === 'customInput') return '#FF5555'; // Red
+                        if (node.type === 'llm') return '#00CC88'; // Green
+                        if (node.type === 'customOutput') return '#C8A4E9'; // Purple
+                        if (node.type === 'text') return '#3D10AD'; // Deep Purple
+                        return '#A2A0A0';
+                    }}
+                    nodeStrokeColor={(node) => {
+                        if (node.type === 'drawing') return 'transparent';
+                        return isDarkMode ? '#FFFFFF' : '#0D0D0D';
+                    }}
+                    nodeBorderRadius={2}
                     position="bottom-left"
                 />
                 <NavToolbar handlePreviewDownload={handlePreviewDownload} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />

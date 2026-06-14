@@ -26,7 +26,12 @@ export const ContextMenu = ({ id, type, top, left, right, bottom, onCopy, onDupl
       {type === 'pane' ? (
         <div className="omori-context-menu-item" onClick={onPaste}>Paste</div>
       ) : type === 'selection' ? (
-        <div className="omori-context-menu-item danger" onClick={onDelete}>Delete Selection</div>
+        <>
+          <div className="omori-context-menu-item" onClick={onCopy}>Copy</div>
+          {onDuplicate && <div className="omori-context-menu-item" onClick={onDuplicate}>Duplicate</div>}
+          <div className="omori-context-menu-divider"></div>
+          <div className="omori-context-menu-item danger" onClick={onDelete}>Delete Selection</div>
+        </>
       ) : (
         <>
           {onToggleGrayscale && (
